@@ -41,7 +41,6 @@ const port = process.env.PORT || 3000
 const templatePath = path.join(__dirname, "./templates/views")
 const templatePartialPath = path.join(__dirname, "./templates/partials")
 
-
 // middleware
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', req.headers.origin);
@@ -52,7 +51,6 @@ app.use(morgan('tiny'))
 app.use(bodyParser.json())
 const getuser = require('./middlewares/getuser')
 const authenticateToken = require('./middlewares/authenticateToken')
-
 
 // Templates middlewares
 app.use(express.static('public'));
@@ -65,7 +63,6 @@ hbs.registerPartials(templatePartialPath)
 app.get('/', getuser, (req, res) => {
     res.render("index", { user: { username: req.account.username } })
 })
-
 
 // RegistrationPage Routes
 app.get('/accountPage', getuser, (req, res) => {
@@ -126,8 +123,6 @@ app.get('/login', getuser, (req, res) => {
     res.render('login', { user: { username: req.account.username } });
 })
 
-
-
 // fetching data
 app.post('/login', getuser, async (req, res) => {
     try {
@@ -143,7 +138,7 @@ app.post('/login', getuser, async (req, res) => {
 
         if (matchedPassword) {
             const token = jwt.sign({
-                username : existingUser.username,
+                username: existingUser.username,
                 Register_email: existingUser.Register_email,
                 id: existingUser._id
             }, SECRETKEY, { expiresIn: '1h' });
@@ -163,15 +158,13 @@ app.post('/login', getuser, async (req, res) => {
     }
 });
 
-
 app.get("/logout", (req, res) => {
     res.clearCookie('token')
     res.clearCookie('existingUser')
     res.send("logged out successfully")
 })
 
-
-app.get('*', getuser,(req, res) => {
+app.get('*', getuser, (req, res) => {
     res.render("404page", { user: { username: req.account.username } })
 })
 
