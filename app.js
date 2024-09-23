@@ -105,7 +105,7 @@ app.post('/accountPage', getuser, async (req, res) => {
 
         if (conf_password !== Register_password) {
             console.error('Passwords do not match');
-            return res.status(400).send("Passwords do not match");
+            return res.status(400)
         }
 
         const registered = await registration.create({

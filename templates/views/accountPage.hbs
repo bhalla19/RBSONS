@@ -29,25 +29,28 @@
 
             </div>
             <div id="Registerform" class="form ml-14 mt-3 ">
-                <form action="/accountPage" method="post">
+                <form action="/accountPage" method="post" onsubmit=validatePassword()>
                     <div class="name">
                         <label for="name" class="font-mono text-lg text-[#112A46]">Username</label>
-                        <input type="text" name="username" placeholder="Enter your Username"
+                        <input type="text" name="username" required="true" placeholder="Enter your Username"
                             class="border-2 border-[#DDDDDD] px-2 pt-1 pb-1 rounded-lg mb-1 ml-24">
                     </div>
                     <div class="email">
                         <label for="email" class="font-mono text-lg text-[#112A46]">Email</label>
-                        <input type="email" name="Register_email" id="" placeholder="Enter your Email Address"
+                        <input type="email" name="Register_email" required="true" id=""
+                            placeholder="Enter your Email Address"
                             class="border-2 border-[#DDDDDD] px-2 pt-1 pb-1 rounded-lg mb-1 ml-32">
                     </div>
                     <div class="password">
                         <label for="password" class="font-mono text-lg text-[#112A46]">Password</label>
-                        <input type="password" name="Register_password" id="" placeholder="Password"
+                        <input type="password" required="true" name="Register_password" id="password"
+                            placeholder="Password" minlength="8"
                             class="border-2 border-[#DDDDDD] px-2 pt-1 pb-1 rounded-lg mb-1  ml-24">
                     </div>
                     <div class="conf_password">
                         <label for="conf_password" class="font-mono text-lg text-[#112A46]">Confirm Password</label>
-                        <input type="password" name="conf_password" id="" placeholder="Confirm Password"
+                        <input type="password" required="true" name="conf_password" id="conf_password"
+                            placeholder="Confirm Password"
                             class="border-2 border-[#DDDDDD] px-3 pt-1 pb-1 rounded-lg mb-1 ml-4">
                     </div>
                     <button
@@ -57,30 +60,17 @@
         </div>
     </div>
 </body>
-{{!--
 <script>
-    function toggleVisibility(target) {
-        let login = document.getElementById("loginForm");
-        let register = document.getElementById("Registerform");
+    function validatePassword() {
 
-        if (target === 'login') {
-            if (login.style.display === "none") {
-                login.style.display = "block";
-                register.style.display = "none";
-            } else {
-                login.style.display = "block";
-                register.style.display = "none";
-            }
-        } else if (target === 'register') {
-            if (register.style.display === "none") {
-                login.style.display = "none";
-                register.style.display = "block";
-            } else {
-                login.style.display = "none";
-                register.style.display = "block";
-            }
+        let conf_password = document.getElementById("conf_password");
+        let password = document.getElementById("password");
+
+        if (password.value != conf_password.value) {
+            alert("Passwords do not match");
         }
     }
-</script> --}}
+
+</script>
 
 </html>

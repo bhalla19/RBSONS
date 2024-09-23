@@ -30,16 +30,13 @@ router.post('/Products', upload.single('image') ,async (req, res) => {
             name: Joi.string().required(),
             description: Joi.string().required(),
             richDescription: Joi.string().required(),
-            // image: Joi.string(),
             countInStock: Joi.number().required(),
-            // images: Joi.string(),
             brand: Joi.string().required(),
             price: Joi.number().required(),
             category:Joi.string().required(),
-            // dateCreated: Joi.date()
         })
         const result = schema.validate(req.body)
-        // console.log(result)
+
         const imagePath = req.file.path
         req.body.image = imagePath
         const product = new productModel({
@@ -52,7 +49,7 @@ router.post('/Products', upload.single('image') ,async (req, res) => {
             brand: req.body.brand,
             price: req.body.price,
             category:req.body.category
-            // dateCreated: req.body.dateCreated
+
         })
         const productlisted = await product.save()
         res.send("Done")
